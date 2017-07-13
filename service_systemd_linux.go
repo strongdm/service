@@ -158,8 +158,6 @@ Description={{.Description}}
 ConditionFileIsExecutable={{.Path|cmdEscape}}
 
 [Service]
-StartLimitInterval=5
-StartLimitBurst=10
 ExecStart={{.Path|cmdEscape}}{{range .Arguments}} {{.|cmd}}{{end}}
 {{if .ChRoot}}RootDirectory={{.ChRoot|cmd}}{{end}}
 {{if .WorkingDirectory}}WorkingDirectory={{.WorkingDirectory|cmdEscape}}{{end}}
@@ -167,7 +165,7 @@ ExecStart={{.Path|cmdEscape}}{{range .Arguments}} {{.|cmd}}{{end}}
 {{if .ReloadSignal}}ExecReload=/bin/kill -{{.ReloadSignal}} "$MAINPID"{{end}}
 {{if .PIDFile}}PIDFile={{.PIDFile|cmd}}{{end}}
 Restart=always
-RestartSec=120
+RestartSec=3
 EnvironmentFile=-/etc/sysconfig/{{.Name}}
 
 [Install]
